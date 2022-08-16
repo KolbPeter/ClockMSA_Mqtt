@@ -20,9 +20,12 @@ namespace ClockMqtt.BinaryClock
         }
 
         /// <inheritdoc/>
-        public IEnumerable<DisplayDataEntity> CreateDisplayData(DateTime dateTime) =>
-            binaryClock
-                .DisplayLedStrips(dateTime)
-                .Select(x => new DisplayDataEntity(x.DisplayPin, x.Leds));
+        public DisplayDataEntities CreateDisplayData(DateTime dateTime) =>
+            new()
+            {
+                LedStrips = binaryClock
+                    .DisplayLedStrips(dateTime)
+                    .Select(x => new DisplayDataEntity(x.DisplayPin, x.Leds))
+            };
     }
 }
