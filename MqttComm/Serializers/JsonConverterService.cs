@@ -1,5 +1,4 @@
 ﻿using MqttComm.ActionResults;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace MqttComm.Serializers
