@@ -15,10 +15,7 @@ namespace ClockMqtt
                     services
                         .WithClockServices()
                         .WithMqttServices(
-                            logger: ConfigureLogger.Create<IMqttService>(),
-                            brokerAddress: "192.168.1.201",
-                            userName: "kolb",
-                            password: "17704291114.Kp"))
+                            logger: ConfigureLogger.Create<IMqttService>()))
                 .Build();
 
             await host.RunAsync();

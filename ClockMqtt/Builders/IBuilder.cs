@@ -6,12 +6,12 @@
     {
         
         /// <summary>
-        /// Gets an object of type <typeparamref name="TTarget"/>.</typeparam>.
+        /// Gets an object of type <typeparamref name="TTarget"/>.
         /// </summary>
         TTarget Create { get; }
 
         /// <summary>
-        /// Resets the values of the builder type <typeparamref name="TBuilder"></typeparam>.
+        /// Gets an object of type <typeparamref name="TBuilder"/> with default values.
         /// </summary>
         /// <typeparam name="TBuilder">The type of the object to reset values.</typeparam>
         TBuilder Reset { get; }

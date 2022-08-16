@@ -16,7 +16,6 @@ namespace ClockMqtt.Builders
         /// Instantiate a <see cref="LedStripBuilder"/>.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> implementation to use.</param>
-        /// <param name="displayService">The <see cref="IDisplayService"/> implementation to use.</param>
         public LedStripBuilder(ILogger<ILedStrip> logger)
         {
             Logger = logger;

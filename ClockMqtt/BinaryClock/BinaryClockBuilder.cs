@@ -5,12 +5,21 @@ using ClockMqtt.Leds;
 
 namespace ClockMqtt.BinaryClock
 {
+    /// <summary>
+    /// Default implementation of <see cref="IBinaryClockBuilder"/>.
+    /// </summary>
     public class BinaryClockBuilder : IBinaryClockBuilder
     {
         private readonly IClockBuilder clockBuilder;
         private readonly ILedStripBuilder ledStripBuilder;
         private readonly IPartialLedStripBuilder partialLedStripBuilder;
 
+        /// <summary>
+        /// Instantiates a <see cref="BinaryClockBuilder"/>.
+        /// </summary>
+        /// <param name="clockBuilder">The <see cref="IClockBuilder"/> to use.</param>
+        /// <param name="ledStripBuilder">The <see cref="ILedStripBuilder"/> to use.</param>
+        /// <param name="partialLedStripBuilder">The <see cref="IPartialLedStripBuilder"/> to use.</param>
         public BinaryClockBuilder(
             IClockBuilder clockBuilder,
             ILedStripBuilder ledStripBuilder,
@@ -21,6 +30,7 @@ namespace ClockMqtt.BinaryClock
             this.partialLedStripBuilder = partialLedStripBuilder;
         }
 
+        /// <inheritdoc/>
         public IClock CreateBinaryClock() =>
             clockBuilder
                 .WithLedStrip(newLedStrip: ledStripBuilder

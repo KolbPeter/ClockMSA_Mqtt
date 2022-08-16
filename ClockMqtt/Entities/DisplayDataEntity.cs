@@ -3,14 +3,18 @@
 namespace ClockMqtt.Entities;
 
 /// <summary>
-/// Default implementation of <see cref="IDisplayDataEntity"/>.
+/// Record to store display data values.
 /// </summary>
-public record DisplayDataEntity : IDisplayDataEntity
+public record DisplayDataEntity
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Gets the display pin to use to display teh led values.
+    /// </summary>
     public int DisplayPin { get; init; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Gets the led values to display.
+    /// </summary>
     public IEnumerable<ILed> Leds { get; init; }
 
     /// <summary>

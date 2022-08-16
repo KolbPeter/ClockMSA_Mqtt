@@ -13,7 +13,7 @@ namespace ClockMqtt.Builders
         private Func<DateTime, int, IEnumerable<bool>> Calculator { get; init; }
         private ILed ColorWhenSet { get; init; }
         private ILed ColorWhenCleared { get; init; }
-        private ILogger<IPartialLedStrip> Logger { get; init; }
+        private ILogger<IPartialLedStrip> Logger { get; }
 
         /// <summary>
         /// Instantiate a <see cref="PartialLedStripBuilder"/>.

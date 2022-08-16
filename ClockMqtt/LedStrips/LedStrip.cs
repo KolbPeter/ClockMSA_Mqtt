@@ -15,7 +15,6 @@ namespace ClockMqtt.LedStrips
         /// </summary>
         /// <param name="displayPin">The pin number this led strip is connected to.</param>
         /// <param name="partialLedStrips">A collection of <see cref="IPartialLedStrip"/> to use.</param>
-        /// <param name="displayService">The <see cref="IDisplayService"/> implementation to use.</param>
         /// <param name="logger"></param>
         public LedStrip(
             int displayPin,

@@ -22,6 +22,8 @@ public class BinaryClockRunner : BackgroundService
     /// </summary>
     /// <param name="logger">The <see cref="ILogger"/> to use.</param>
     /// <param name="binaryClockService">The <see cref="IBinaryClockService"/> implementation to use.</param>
+    /// <param name="mqttService">The <see cref="IMqttService"/> implementation to use.</param>
+    /// <param name="jsonConverterService">The <see cref="IJsonConverterService"/> implementation to use.</param>
     public BinaryClockRunner(
         ILogger<BinaryClockRunner> logger,
         IBinaryClockService binaryClockService,

@@ -3,9 +3,9 @@
 namespace ClockMqtt.Leds
 {
     /// <summary>
-    /// Default implementation of <see cref="ILed"/>.
+    /// A record to store color values for a single led.
     /// </summary>
-    public class Led : ILed
+    public record Led : ILed
     {
         /// <summary>
         /// Instantiates a <see cref="Led"/>.

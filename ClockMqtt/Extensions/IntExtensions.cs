@@ -15,10 +15,10 @@ namespace ClockMqtt.Extensions
           this int number,
           int ledCount)
         {
-            for (int i = 0; i < ledCount; i++)
+            for (var i = 0; i < ledCount; i++)
             {
                 yield return number % 2 == 1;
-                number = number / 2;
+                number /= 2;
             }
         }
     }
