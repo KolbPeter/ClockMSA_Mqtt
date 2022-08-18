@@ -1,6 +1,4 @@
-﻿using DisplayMqtt.Leds;
-
-namespace DisplayMqtt.Entities;
+﻿namespace DisplayMqtt.Entities;
 
 /// <summary>
 /// Interface for <see cref="IDisplayDataEntity"/>.

@@ -1,6 +1,4 @@
-﻿using DisplayMqtt.Leds;
-
-namespace DisplayMqtt.Entities;
+﻿namespace DisplayMqtt.Entities;
 
 /// <summary>
 /// Default implementation of <see cref="IDisplayDataEntity"/>.

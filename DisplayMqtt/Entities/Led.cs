@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace DisplayMqtt.Leds
+namespace DisplayMqtt.Entities
 {
     /// <summary>
     /// Default implementation of <see cref="ILed"/>.

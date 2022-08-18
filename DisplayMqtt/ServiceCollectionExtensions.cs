@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DisplayMqtt.DisplayServices;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DisplayMqtt
 {
@@ -8,6 +9,7 @@ namespace DisplayMqtt
         {
             return services
                         .AddHostedService<DisplayRunner>()
+                        .AddSingleton<IDisplayService, Ws2812bDisplay>()
                         .AddLogging();
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace DisplayMqtt.Leds
+﻿namespace DisplayMqtt.Entities
 {
     /// <summary>
     /// Interface for a single led color values.
