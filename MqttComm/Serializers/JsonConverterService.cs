@@ -3,21 +3,21 @@ using Newtonsoft.Json;
 
 namespace MqttComm.Serializers
 {
+    /// <summary>
+    /// Default implementation of <see cref="IJsonConverterService"/>.
+    /// </summary>
     public class JsonConverterService : IJsonConverterService
     {
-        public JsonConverterService()
-        {
-        }
-
-        public ActionResult<string> Serialize<T>(T toSerialize)
+        /// <inheritdoc/>
+        public ActionResult<string> Serialize<T>(T objectToSerialize)
         {
             try
             {
-                var result = JsonConvert.SerializeObject(toSerialize);
+                var result = JsonConvert.SerializeObject(objectToSerialize);
                 if (result == null)
                 {
                     return new ActionResult<string>(
-                        new Exception($"Serialization failed! '{toSerialize?.ToString() ?? nameof(toSerialize)}'"));
+                        new Exception($"Serialization failed! '{objectToSerialize?.ToString() ?? nameof(objectToSerialize)}'"));
                 }
 
                 return new ActionResult<string>(result);
@@ -28,6 +28,7 @@ namespace MqttComm.Serializers
             }
         }
 
+        /// <inheritdoc/>
         public ActionResult<T> Deserialize<T>(string message)
         {
             try

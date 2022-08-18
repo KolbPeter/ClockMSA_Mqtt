@@ -9,7 +9,7 @@ namespace ClockMqtt.Builders
     public record LedStripBuilder : ILedStripBuilder
     {
         private IEnumerable<IPartialLedStrip> PartialLedStrips { get; init; }
-        private ILogger<ILedStrip> Logger { get; init; }
+        private ILogger<ILedStrip> Logger { get; }
         private int DisplayPin { get; init; }
 
         /// <summary>

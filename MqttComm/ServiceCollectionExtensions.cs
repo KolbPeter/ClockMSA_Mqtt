@@ -5,8 +5,17 @@ using MqttComm.Serializers;
 
 namespace MqttComm
 {
+    /// <summary>
+    /// Extension methods for <see cref="IServiceCollection"/>.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Extension method to add MQTT communication services for the given <paramref name="services"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/> to use.</param>
+        /// <param name="logger">The <see cref="ILogger"/> implementation to use.</param>
+        /// <returns>Returns an <see cref="IServiceCollection"/> with the added services.</returns>
         public static IServiceCollection WithMqttServices(
             this IServiceCollection services,
             ILogger<IMqttService> logger)

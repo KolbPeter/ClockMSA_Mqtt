@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace TimerMqtt.Timers;
 
 /// <summary>

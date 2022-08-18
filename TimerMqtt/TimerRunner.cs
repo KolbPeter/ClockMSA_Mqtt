@@ -21,7 +21,8 @@ public class TimerRunner : BackgroundService
     /// Constructor for this implementation of <see cref="BackgroundService"/>.
     /// </summary>
     /// <param name="logger">The <see cref="ILogger"/> to use.</param>
-    /// <param name="binaryClockService">The <see cref="IBinaryClockService"/> implementation to use.</param>
+    /// <param name="mqttService">The <see cref="IMqttService"/> implementation to use.</param>
+    /// <param name="jsonConverterService">The <see cref="IJsonConverterService"/> implementation to use.</param>
     public TimerRunner(
         ILogger<TimerRunner> logger,
         IMqttService mqttService,

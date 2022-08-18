@@ -9,6 +9,9 @@ using System.Text;
 
 namespace MqttComm
 {
+    /// <summary>
+    /// Default implementation of <see cref="IMqttService"/>.
+    /// </summary>
     public class MqttService : IMqttService
     {
         private readonly IManagedMqttClient client;
@@ -20,6 +23,13 @@ namespace MqttComm
         private readonly Guid clientId = Guid.NewGuid();
         private IEnumerable<ISubscription> subscriptions;
 
+        /// <summary>
+        /// Instantiate a <see cref="MqttService"/>.
+        /// </summary>
+        /// <param name="logger">The <see cref="ILogger"/> implementation to use.</param>
+        /// <param name="brokerAddress">The address of the broker.</param>
+        /// <param name="userName">The user name to use to connect to the broker.</param>
+        /// <param name="password">The password to use to connect to the broker.</param>
         public MqttService(
             ILogger<IMqttService> logger,
             string brokerAddress,
@@ -64,6 +74,7 @@ namespace MqttComm
                     }
                 });
 
+        /// <inheritdoc/>
         public async void Subscribe(string topic, Action<string> onReceive)
         {
             await client.SubscribeAsync(topic);
@@ -74,6 +85,7 @@ namespace MqttComm
             logger.LogDebug($"Subscribed on topic {topic}");
         }
 
+        /// <inheritdoc/>
         public async void UnSubscribe(string topic)
         {
             await client.UnsubscribeAsync(topic);
@@ -82,6 +94,7 @@ namespace MqttComm
             logger.LogDebug($"Unsubscribed from topic {topic}");
         }
 
+        /// <inheritdoc/>
         public async Task<ActionResult<string>> Publish(string topic, string message)
         {
             var managedMessage = new ManagedMqttApplicationMessageBuilder()

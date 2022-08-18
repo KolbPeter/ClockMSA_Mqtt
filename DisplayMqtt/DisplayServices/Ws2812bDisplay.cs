@@ -5,15 +5,23 @@ using Microsoft.Extensions.Logging;
 
 namespace DisplayMqtt.DisplayServices
 {
+    /// <summary>
+    /// Implementation of <see cref="IDisplayService"/> to control a GpIO pin.
+    /// </summary>
     public class Ws2812bDisplay : IDisplayService
     {
         private readonly ILogger<IDisplayService> logger;
 
+        /// <summary>
+        /// Instantiates a <see cref="Ws2812bDisplay"/>.
+        /// </summary>
+        /// <param name="logger">The <see cref="ILogger"/> implementation to use.</param>
         public Ws2812bDisplay(ILogger<IDisplayService> logger)
         {
             this.logger = logger;
         }
 
+        /// <inheritdoc/>
         public void Display(DisplayDataEntities displayData)
         {
 #if DEBUG
