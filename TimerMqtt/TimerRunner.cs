@@ -57,7 +57,7 @@ public class TimerRunner : BackgroundService
     {
         var dte = new DateTimeEntity() with { DateTime = DateTime.Now };
         var conversionResult = jsonConverterService.Serialize(dte);
-        if (conversionResult.IsSuccessfull)
+        if (conversionResult.IsSuccessful)
         {
             mqttService.Publish("Timer.Tick", conversionResult.Data!);
             return;

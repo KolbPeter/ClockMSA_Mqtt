@@ -48,7 +48,7 @@ public class DisplayRunner : BackgroundService
             var conversionResult = jsonConverterService
                 .Deserialize<DisplayDataEntities>(message: jsonMessage);
 
-            if (conversionResult.IsSuccessfull)
+            if (conversionResult.IsSuccessful)
             {
                 displayService.Display(conversionResult.Data!);
             }

@@ -46,14 +46,14 @@ public class BinaryClockRunner : BackgroundService
         var conversionResult = jsonConverterService
             .Deserialize<DateTimeEntity>(message: jsonMessage);
         
-        if (conversionResult.IsSuccessfull)
+        if (conversionResult.IsSuccessful)
         {
             var dataConversion = jsonConverterService
                 .Serialize(
-                    toSerialize: binaryClockService
+                    objectToSerialize: binaryClockService
                         .CreateDisplayData(conversionResult.Data!.DateTime));
 
-            if (dataConversion.IsSuccessfull)
+            if (dataConversion.IsSuccessful)
             {
                 mqttService.Publish(
                     topic: "Clock.DisplayData",
