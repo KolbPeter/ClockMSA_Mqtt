@@ -35,7 +35,7 @@ namespace ClockMqtt.BinaryClock
             clockBuilder
                 .WithLedStrip(newLedStrip: ledStripBuilder
                     .Reset
-                    .WithDisplayPin(newDisplayPin: 1)
+                    .WithDisplayPin(newDisplayPin: 23)
                     .WithPartialLedStrip(
                         newPartialLedStrip: partialLedStripBuilder
                             .Reset
@@ -64,7 +64,7 @@ namespace ClockMqtt.BinaryClock
                     .Create)
                 .WithLedStrip(ledStripBuilder
                     .Reset
-                    .WithDisplayPin(2)
+                    .WithDisplayPin(24)
                     .WithPartialLedStrip(
                         newPartialLedStrip: partialLedStripBuilder
                             .WithLedCount(newLedCount: 5)

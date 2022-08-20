@@ -16,9 +16,13 @@ namespace DisplayMqtt
         public static IServiceCollection WithClockServices(this IServiceCollection services)
         {
             return services
-                        .AddHostedService<DisplayRunner>()
-                        .AddSingleton<IDisplayService, Ws2812bDisplay>()
-                        .AddLogging();
+                .AddHostedService<DisplayRunner>()
+#if DEBUG
+                .AddSingleton<IDisplayService, DebugDisplyService>() 
+#else
+                .AddSingleton<IDisplayService, Ws2812bDisplay>() 
+#endif
+                .AddLogging();
         }
     }
 }

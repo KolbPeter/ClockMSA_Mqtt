@@ -39,9 +39,10 @@ namespace DisplayMqtt.Extensions
         /// <param name="displayPin">The GpIO pin to use.</param>
         public static void Send_0(this GpioController controller, int displayPin)
         {
-            Thread.Sleep(TimeSpan.FromMilliseconds(0.4));
+            controller.Write(displayPin, PinValue.High);
+            Thread.Sleep(TimeSpan.FromTicks(40000));
             controller.Write(displayPin, PinValue.Low);
-            Thread.Sleep(TimeSpan.FromMilliseconds(0.85));
+            Thread.Sleep(TimeSpan.FromTicks(85000));
             controller.Write(displayPin, PinValue.High);
         }
 
@@ -52,9 +53,10 @@ namespace DisplayMqtt.Extensions
         /// <param name="displayPin">The GpIO pin to use.</param>
         public static void Send_1(this GpioController controller, int displayPin)
         {
-            Thread.Sleep(TimeSpan.FromMilliseconds(0.8));
+            controller.Write(displayPin, PinValue.High);
+            Thread.Sleep(TimeSpan.FromTicks(80000));
             controller.Write(displayPin, PinValue.Low);
-            Thread.Sleep(TimeSpan.FromMilliseconds(0.45));
+            Thread.Sleep(TimeSpan.FromTicks(45000));
             controller.Write(displayPin, PinValue.High);
         }
 
@@ -69,15 +71,15 @@ namespace DisplayMqtt.Extensions
 
             IEnumerable<bool> ByteToBitmap(byte data)
             {
-                for (var i = 1; i <= 128; i *= 2)
+                for (var i = 128; i >= 1; i /= 2)
                 {
                     yield return ((data & i) != 0);
                 }
             }
 
             IEnumerable<bool> LedToBitmap(ILed led) =>
-                ByteToBitmap(led.Red)
-                    .Concat(ByteToBitmap(led.Green))
+                ByteToBitmap(led.Green)
+                    .Concat(ByteToBitmap(led.Red))
                     .Concat(ByteToBitmap(led.Blue));
 
         }
