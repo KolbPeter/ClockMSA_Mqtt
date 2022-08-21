@@ -1,5 +1,5 @@
 ﻿using System.Device.Gpio;
-using Common.DataTransferObjects;
+using DisplaMqtt.Dtos;
 
 namespace DisplayMqtt.Extensions
 {
@@ -75,10 +75,10 @@ namespace DisplayMqtt.Extensions
                 }
             }
 
-            IEnumerable<bool> LedToBitmap(Led led) =>
-                ByteToBitmap(led.Green)
-                    .Concat(ByteToBitmap(led.Red))
-                    .Concat(ByteToBitmap(led.Blue));
+            IEnumerable<bool> LedToBitmap(byte[] led) =>
+                ByteToBitmap(led[0])
+                    .Concat(ByteToBitmap(led[1]))
+                    .Concat(ByteToBitmap(led[2]));
         }
 
         private static void SetAsync(this GpioController controller, int displayPin)

@@ -1,4 +1,4 @@
-using Common.DataTransferObjects;
+using DisplaMqtt.Dtos;
 using DisplayMqtt.DisplayServices;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -46,7 +46,7 @@ public class DisplayRunner : BackgroundService
         try
         {
             var conversionResult = jsonConverterService
-                .Deserialize<DisplayDataEntities>(message: jsonMessage);
+                .Deserialize<List<DisplayDataEntity>>(message: jsonMessage);
 
             if (conversionResult.IsSuccessful)
             {

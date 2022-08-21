@@ -1,5 +1,5 @@
 using ClockMqtt.BinaryClock;
-using Common.DataTransferObjects;
+using ClockMqtt.Dtos;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MqttComm;

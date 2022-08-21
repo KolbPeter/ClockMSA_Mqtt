@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using Common.DataTransferObjects;
+using DisplaMqtt.Dtos;
 using DisplayMqtt.Extensions;
 using Microsoft.Extensions.Logging;
 
@@ -19,12 +19,12 @@ namespace DisplayMqtt.DisplayServices
         }
 
         /// <inheritdoc/>
-        public void Display(DisplayDataEntities displayData)
+        public void Display(IEnumerable<DisplayDataEntity> displayData)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            foreach (var ledStrip in displayData.LedStrips)
+            foreach (var ledStrip in displayData)
             {
                 var actions = ledStrip
                     .CreateBitMap()

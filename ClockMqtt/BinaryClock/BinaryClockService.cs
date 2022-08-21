@@ -1,5 +1,5 @@
 ﻿using ClockMqtt.Clocks;
-using Common.DataTransferObjects;
+using ClockMqtt.Dtos;
 
 namespace ClockMqtt.BinaryClock
 {
@@ -20,22 +20,14 @@ namespace ClockMqtt.BinaryClock
         }
 
         /// <inheritdoc/>
-        public DisplayDataEntities CreateDisplayData(DateTime dateTime) =>
-            new Common.DataTransferObjects.DisplayDataEntities()
-            {
-                LedStrips = binaryClock
-                    .DisplayLedStrips(dateTime)
-                    .Select(x => new Common.DataTransferObjects.DisplayDataEntity()
-                    { 
-                        DisplayPin = x.DisplayPin,
-                        Leds = x.Leds.Select(y => 
-                            new Common.DataTransferObjects.Led() with
-                            {
-                                Red = y.Red,
-                                Green = y.Green,
-                                Blue = y.Blue
-                            })
-                    })
-            };
-    }
+        public IEnumerable<DisplayDataEntity> CreateDisplayData(DateTime dateTime) =>
+            binaryClock
+                .DisplayLedStrips(dateTime)
+                .Select(x => new DisplayDataEntity()
+                {
+                    DisplayPin = x.DisplayPin,
+                    Leds = x.Leds.Select(y =>
+                        new[] { y.Red, y.Green, y.Blue })
+                });
+    };
 }

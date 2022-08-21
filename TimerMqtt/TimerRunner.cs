@@ -1,8 +1,8 @@
-using Common.DataTransferObjects;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MqttComm;
 using MqttComm.Serializers;
+using TimerMqtt.Dtos;
 using TimerMqtt.Timers;
 
 namespace TimerMqtt;

@@ -1,4 +1,4 @@
-﻿using Common.DataTransferObjects;
+﻿using DisplaMqtt.Dtos;
 
 namespace DisplayMqtt.DisplayServices
 {
@@ -11,6 +11,6 @@ namespace DisplayMqtt.DisplayServices
         /// Displays the given <paramref name="displayData"/>
         /// </summary>
         /// <param name="displayData">A collection of <see cref="DisplayDataEntity"/> as <see cref="DisplayDataEntities"/>too display.</param>
-        void Display(DisplayDataEntities displayData);
+        void Display(IEnumerable<DisplayDataEntity> displayData);
     }
 }
