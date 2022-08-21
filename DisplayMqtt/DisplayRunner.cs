@@ -1,5 +1,5 @@
+using Common.DataTransferObjects;
 using DisplayMqtt.DisplayServices;
-using DisplayMqtt.Entities;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MqttComm;
@@ -38,7 +38,7 @@ public class DisplayRunner : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        mqttService.Subscribe(topic: "Clock.DisplayData", onReceive: ReceivedDisplayData);
+        await mqttService.SubscribeAsync(topic: "Clock.DisplayData", onReceive: ReceivedDisplayData);
     }
 
     private void ReceivedDisplayData(string jsonMessage)

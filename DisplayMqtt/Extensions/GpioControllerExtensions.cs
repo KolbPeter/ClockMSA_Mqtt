@@ -1,5 +1,5 @@
 ﻿using System.Device.Gpio;
-using DisplayMqtt.Entities;
+using Common.DataTransferObjects;
 
 namespace DisplayMqtt.Extensions
 {
@@ -63,7 +63,7 @@ namespace DisplayMqtt.Extensions
         /// </summary>
         /// <param name="displayData">The data to display.</param>
         /// <returns>Returns a collection of <see cref="bool"/>.</returns>
-        public static IEnumerable<bool> CreateBitMap(this IDisplayDataEntity displayData)
+        public static IEnumerable<bool> CreateBitMap(this DisplayDataEntity displayData)
         {
              return displayData.Leds.SelectMany(LedToBitmap);
 
@@ -75,7 +75,7 @@ namespace DisplayMqtt.Extensions
                 }
             }
 
-            IEnumerable<bool> LedToBitmap(ILed led) =>
+            IEnumerable<bool> LedToBitmap(Led led) =>
                 ByteToBitmap(led.Green)
                     .Concat(ByteToBitmap(led.Red))
                     .Concat(ByteToBitmap(led.Blue));

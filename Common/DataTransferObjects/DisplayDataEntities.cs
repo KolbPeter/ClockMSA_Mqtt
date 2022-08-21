@@ -1,4 +1,4 @@
-﻿namespace DisplayMqtt.Entities
+﻿namespace Common.DataTransferObjects
 {
     /// <summary>
     /// Record to store a collection of <see cref="DisplayDataEntities"/> 

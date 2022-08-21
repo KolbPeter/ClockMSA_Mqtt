@@ -35,7 +35,7 @@ namespace TimerMqtt.Timers
             return ticker;
         }
 
-        private async void Ticker_Elapsed(object? sender, ElapsedEventArgs e)
+        private void Ticker_Elapsed(object? sender, ElapsedEventArgs e)
         {
             Task.Run(() => triggeredAction());
         }

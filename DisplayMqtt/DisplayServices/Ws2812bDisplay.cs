@@ -1,5 +1,5 @@
 ﻿using System.Device.Gpio;
-using DisplayMqtt.Entities;
+using Common.DataTransferObjects;
 using DisplayMqtt.Extensions;
 using Microsoft.Extensions.Logging;
 

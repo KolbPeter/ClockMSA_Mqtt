@@ -1,4 +1,4 @@
-﻿namespace TimerMqtt.Entities
+﻿namespace Common.DataTransferObjects
 {
     /// <summary>
     /// Record to store date time values.

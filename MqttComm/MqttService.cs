@@ -75,7 +75,7 @@ namespace MqttComm
                 });
 
         /// <inheritdoc/>
-        public async void Subscribe(string topic, Action<string> onReceive)
+        public async Task SubscribeAsync(string topic, Action<string> onReceive)
         {
             await client.SubscribeAsync(topic);
             subscriptions = subscriptions
@@ -86,7 +86,7 @@ namespace MqttComm
         }
 
         /// <inheritdoc/>
-        public async void UnSubscribe(string topic)
+        public async Task UnSubscribeAsync(string topic)
         {
             await client.UnsubscribeAsync(topic);
             subscriptions = subscriptions
@@ -95,7 +95,7 @@ namespace MqttComm
         }
 
         /// <inheritdoc/>
-        public async Task<ActionResult<string>> Publish(string topic, string message)
+        public async Task<ActionResult<string>> PublishAsync(string topic, string message)
         {
             var managedMessage = new ManagedMqttApplicationMessageBuilder()
                 .WithApplicationMessage(x =>

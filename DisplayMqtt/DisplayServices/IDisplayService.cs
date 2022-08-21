@@ -1,4 +1,4 @@
-﻿using DisplayMqtt.Entities;
+﻿using Common.DataTransferObjects;
 
 namespace DisplayMqtt.DisplayServices
 {

@@ -1,4 +1,4 @@
-﻿using ClockMqtt.Entities;
+﻿using Common.DataTransferObjects;
 
 namespace ClockMqtt.BinaryClock;
 

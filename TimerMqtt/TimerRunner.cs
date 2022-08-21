@@ -1,8 +1,8 @@
+using Common.DataTransferObjects;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MqttComm;
 using MqttComm.Serializers;
-using TimerMqtt.Entities;
 using TimerMqtt.Timers;
 
 namespace TimerMqtt;
@@ -37,8 +37,8 @@ public class TimerRunner : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        mqttService.Subscribe("Timer.Stop", (s) => StopTimer());
-        mqttService.Subscribe("Timer.Start", (s) => StartTimer());
+        await mqttService.SubscribeAsync("Timer.Stop", (s) => StopTimer());
+        await mqttService.SubscribeAsync("Timer.Start", (s) => StartTimer());
     }
 
     private void StopTimer()
@@ -59,7 +59,7 @@ public class TimerRunner : BackgroundService
         var conversionResult = jsonConverterService.Serialize(dte);
         if (conversionResult.IsSuccessful)
         {
-            mqttService.Publish("Timer.Tick", conversionResult.Data!);
+            mqttService.PublishAsync("Timer.Tick", conversionResult.Data!);
             return;
         }
         else
