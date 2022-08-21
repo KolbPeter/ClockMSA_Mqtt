@@ -27,9 +27,9 @@ namespace DisplayMqtt.Extensions
         /// <param name="displayPin">The GpIO pin to use.</param>
         public static void Send_Reset(this GpioController controller, int displayPin)
         {
-            controller.Write(displayPin, PinValue.Low);
+            controller.ClearAsync(displayPin);
             Thread.Sleep(TimeSpan.FromMilliseconds(1));
-            controller.Write(displayPin, PinValue.High);
+            controller.SetAsync(displayPin);
         }
 
         /// <summary>
@@ -39,11 +39,10 @@ namespace DisplayMqtt.Extensions
         /// <param name="displayPin">The GpIO pin to use.</param>
         public static void Send_0(this GpioController controller, int displayPin)
         {
-            controller.Write(displayPin, PinValue.High);
-            Thread.Sleep(TimeSpan.FromTicks(40000));
-            controller.Write(displayPin, PinValue.Low);
-            Thread.Sleep(TimeSpan.FromTicks(85000));
-            controller.Write(displayPin, PinValue.High);
+            Thread.Sleep(TimeSpan.FromTicks(4));
+            controller.ClearAsync(displayPin);
+            Thread.Sleep(TimeSpan.FromTicks(8));
+            controller.SetAsync(displayPin);
         }
 
         /// <summary>
@@ -53,11 +52,10 @@ namespace DisplayMqtt.Extensions
         /// <param name="displayPin">The GpIO pin to use.</param>
         public static void Send_1(this GpioController controller, int displayPin)
         {
-            controller.Write(displayPin, PinValue.High);
-            Thread.Sleep(TimeSpan.FromTicks(80000));
-            controller.Write(displayPin, PinValue.Low);
-            Thread.Sleep(TimeSpan.FromTicks(45000));
-            controller.Write(displayPin, PinValue.High);
+            Thread.Sleep(TimeSpan.FromTicks(8));
+            controller.ClearAsync(displayPin);
+            Thread.Sleep(TimeSpan.FromTicks(4));
+            controller.SetAsync(displayPin);
         }
 
         /// <summary>
@@ -81,7 +79,16 @@ namespace DisplayMqtt.Extensions
                 ByteToBitmap(led.Green)
                     .Concat(ByteToBitmap(led.Red))
                     .Concat(ByteToBitmap(led.Blue));
+        }
 
+        private static void SetAsync(this GpioController controller, int displayPin)
+        {
+            Task.Run(() => controller.Write(displayPin, PinValue.High));
+        }
+
+        private static void ClearAsync(this GpioController controller, int displayPin)
+        {
+            Task.Run(() => controller.Write(displayPin, PinValue.Low));
         }
     }
 }

@@ -39,6 +39,8 @@ namespace DisplayMqtt.DisplayServices
                     {
                         action(controller, ledStrip.DisplayPin);
                     }
+
+                    controller.ClosePin(ledStrip.DisplayPin);
                 }
             }
         }
