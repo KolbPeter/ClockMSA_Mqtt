@@ -15,9 +15,10 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag binclock:$(date +%s)
+      run: docker build . --file Dockerfile --tag binclock:$(date +%s) --output type=local,dest=out 
 
-    - name: Upload image
-      uses: ishworkh/docker-image-artifact-upload@v1
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3
       with:
-        image: binclock:$(date +%s)
+        name: DockerImage
+        path: out/
