@@ -1,4 +1,5 @@
 ﻿using System.Device.Gpio;
+using System.Diagnostics;
 using DisplaMqtt.Dtos;
 using DisplayMqtt.Extensions;
 using Microsoft.Extensions.Logging;
@@ -24,13 +25,16 @@ namespace DisplayMqtt.DisplayServices
         /// <inheritdoc/>
         public void Display(IEnumerable<DisplayDataEntity> displayData)
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             foreach (var ledStrip in displayData)
             {
                 var actions = ledStrip
                     .CreateBitMap()
                     .Select(x => x
-                        ? new Action<GpioController, int>((c, i) => c.Send_1(i))
-                        : new Action<GpioController, int>((c, i) => c.Send_0(i)));
+                        ? new Action<GpioController, int>((c, i) => c.Send_1(i, stopwatch))
+                        : new Action<GpioController, int>((c, i) => c.Send_0(i, stopwatch)));
 
                 using (var controller = ledStrip.DisplayPin.SetPinOutput())
                 {

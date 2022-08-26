@@ -1,5 +1,7 @@
+using System.Diagnostics;
 using DisplaMqtt.Dtos;
 using DisplayMqtt.DisplayServices;
+using DisplayMqtt.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MqttComm;
