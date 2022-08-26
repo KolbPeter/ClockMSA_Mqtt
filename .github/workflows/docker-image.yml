@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag binclock:"$TAG"
+      run: docker build .  --build-arg IMAGE_TAG=$IMAGE_TAG --file Dockerfile --tag binclock:$IMAGE_TAG
 
     - name: Upload image
       uses: ishworkh/docker-image-artifact-upload@v1
