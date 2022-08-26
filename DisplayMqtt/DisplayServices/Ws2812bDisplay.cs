@@ -33,8 +33,8 @@ namespace DisplayMqtt.DisplayServices
                 var actions = ledStrip
                     .CreateBitMap()
                     .Select(x => x
-                        ? new Action<GpioController, int>((c, i) => c.Send_1(i, stopwatch))
-                        : new Action<GpioController, int>((c, i) => c.Send_0(i, stopwatch)));
+                        ? new Action<GpioController, int>((c, i) => c.Send_1(i))
+                        : new Action<GpioController, int>((c, i) => c.Send_0(i)));
 
                 using (var controller = ledStrip.DisplayPin.SetPinOutput())
                 {
