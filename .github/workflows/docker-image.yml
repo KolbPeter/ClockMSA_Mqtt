@@ -11,16 +11,13 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      IMAGE_TAG: "binclock:$(date +%s)"
-
     steps:
     - uses: actions/checkout@v3
 
     - name: Build the Docker image
-      run: docker build . --build-arg IMAGE_TAG --file Dockerfile --tag IMAGE_TAG
+      run: docker build . --file Dockerfile --tag binclock:$(date +%s)
 
     - name: Upload image
       uses: ishworkh/docker-image-artifact-upload@v1
       with:
-        image: $IMAGE_TAG
+        image: binclock:$(date +%s)
