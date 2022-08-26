@@ -1,5 +1,5 @@
 ﻿using System.Device.Gpio;
-using DisplayMqtt.Entities;
+using DisplaMqtt.Dtos;
 
 namespace DisplayMqtt.Extensions
 {
@@ -27,9 +27,9 @@ namespace DisplayMqtt.Extensions
         /// <param name="displayPin">The GpIO pin to use.</param>
         public static void Send_Reset(this GpioController controller, int displayPin)
         {
-            controller.Write(displayPin, PinValue.Low);
+            controller.ClearAsync(displayPin);
             Thread.Sleep(TimeSpan.FromMilliseconds(1));
-            controller.Write(displayPin, PinValue.High);
+            controller.SetAsync(displayPin);
         }
 
         /// <summary>
@@ -39,11 +39,10 @@ namespace DisplayMqtt.Extensions
         /// <param name="displayPin">The GpIO pin to use.</param>
         public static void Send_0(this GpioController controller, int displayPin)
         {
-            controller.Write(displayPin, PinValue.High);
             Thread.Sleep(TimeSpan.FromTicks(4));
-            controller.Write(displayPin, PinValue.Low);
+            controller.ClearAsync(displayPin);
             Thread.Sleep(TimeSpan.FromTicks(8));
-            controller.Write(displayPin, PinValue.High);
+            controller.SetAsync(displayPin);
         }
 
         /// <summary>
@@ -53,11 +52,10 @@ namespace DisplayMqtt.Extensions
         /// <param name="displayPin">The GpIO pin to use.</param>
         public static void Send_1(this GpioController controller, int displayPin)
         {
-            controller.Write(displayPin, PinValue.High);
             Thread.Sleep(TimeSpan.FromTicks(8));
-            controller.Write(displayPin, PinValue.Low);
+            controller.ClearAsync(displayPin);
             Thread.Sleep(TimeSpan.FromTicks(4));
-            controller.Write(displayPin, PinValue.High);
+            controller.SetAsync(displayPin);
         }
 
         /// <summary>
@@ -65,7 +63,7 @@ namespace DisplayMqtt.Extensions
         /// </summary>
         /// <param name="displayData">The data to display.</param>
         /// <returns>Returns a collection of <see cref="bool"/>.</returns>
-        public static IEnumerable<bool> CreateBitMap(this IDisplayDataEntity displayData)
+        public static IEnumerable<bool> CreateBitMap(this DisplayDataEntity displayData)
         {
              return displayData.Leds.SelectMany(LedToBitmap);
 
@@ -77,11 +75,20 @@ namespace DisplayMqtt.Extensions
                 }
             }
 
-            IEnumerable<bool> LedToBitmap(ILed led) =>
-                ByteToBitmap(led.Green)
-                    .Concat(ByteToBitmap(led.Red))
-                    .Concat(ByteToBitmap(led.Blue));
+            IEnumerable<bool> LedToBitmap(byte[] led) =>
+                ByteToBitmap(led[0])
+                    .Concat(ByteToBitmap(led[1]))
+                    .Concat(ByteToBitmap(led[2]));
+        }
 
+        private static void SetAsync(this GpioController controller, int displayPin)
+        {
+            Task.Run(() => controller.Write(displayPin, PinValue.High));
+        }
+
+        private static void ClearAsync(this GpioController controller, int displayPin)
+        {
+            Task.Run(() => controller.Write(displayPin, PinValue.Low));
         }
     }
 }

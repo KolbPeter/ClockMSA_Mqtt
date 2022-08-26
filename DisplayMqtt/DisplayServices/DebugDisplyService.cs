@@ -1,4 +1,5 @@
-using DisplayMqtt.Entities;
+using System.Diagnostics;
+using DisplaMqtt.Dtos;
 using DisplayMqtt.Extensions;
 using Microsoft.Extensions.Logging;
 
@@ -18,57 +19,55 @@ namespace DisplayMqtt.DisplayServices
         }
 
         /// <inheritdoc/>
-        public void Display(DisplayDataEntities displayData)
+        public void Display(IEnumerable<DisplayDataEntity> displayData)
         {
-            foreach (var ledStrip in displayData.LedStrips)
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            foreach (var ledStrip in displayData)
             {
                 var actions = ledStrip
                     .CreateBitMap()
                     .Select(x => x
-                        ? new Action<int>((i) => Fake_Send_1(i))
-                        : new Action<int>((i) => Fake_Send_0(i)));
+                        ? new Action<int>((i) => Fake_Send_1(i, stopwatch))
+                        : new Action<int>((i) => Fake_Send_0(i, stopwatch)));
 
-                Fake_Send_Reset(ledStrip.DisplayPin);
+                Fake_Send_Reset(ledStrip.DisplayPin, stopwatch);
                 foreach (var action in actions)
                 {
                     action(ledStrip.DisplayPin);
                 }
             }
+
+            stopwatch.Stop();
         }
 
-        private void Fake_Send_Reset(int displayPin)
+        private void Fake_Send_Reset(int displayPin, Stopwatch stopwatch)
         {
-            LogLow();
+            stopwatch.Restart();
             Thread.Sleep(TimeSpan.FromMilliseconds(1));
-            LogHigh();
+            LogTime(stopwatch);
         }
 
-        private void Fake_Send_0(int displayPin)
+        private void Fake_Send_0(int displayPin, Stopwatch stopwatch)
         {
-            LogHigh();
-            Thread.Sleep(TimeSpan.FromTicks(40000));
-            LogLow();
-            Thread.Sleep(TimeSpan.FromTicks(85000));
-            LogHigh();
+            stopwatch.Restart();
+            Thread.Sleep(TimeSpan.FromMilliseconds(0.00045));
+            Thread.Sleep(TimeSpan.FromMilliseconds(0.0008));
+            LogTime(stopwatch);
         }
 
-        private void Fake_Send_1(int displayPin)
+        private void Fake_Send_1(int displayPin, Stopwatch stopwatch)
         {
-            LogHigh();
-            Thread.Sleep(TimeSpan.FromTicks(80000));
-            LogLow();
-            Thread.Sleep(TimeSpan.FromTicks(45000));
-            LogHigh();
-        }
+            stopwatch.Restart();
+            Thread.Sleep(TimeSpan.FromMilliseconds(0.00085));
+            Thread.Sleep(TimeSpan.FromMilliseconds(0.0004));
+             LogTime(stopwatch);
+       }
 
-        private void LogHigh()
+        private void LogTime(Stopwatch stopwatch)
         {
-            logger.LogDebug($",{DateTime.Now.ToString("hh:mm:ss.FFFFFF")},1");
-        }
-
-        private void LogLow()
-        {
-            logger.LogDebug($",{DateTime.Now.ToString("hh:mm:ss.FFFFFF")},0");
+            logger.LogDebug($"ms: {stopwatch.Elapsed.TotalMilliseconds}");
         }
     }
 }

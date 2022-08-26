@@ -361,3 +361,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+.vscode/launch.json
+TimerMqtt/TimerLogs/logs.txt
+DisplayMqtt/DisplayLogs/logs.txt
+DisplayMqtt/DisplayLogs/logs_001.txt
+ClockMqtt/ClockLogs/logs.txt
+.vscode/tasks.json
+ClockMqtt/.vscode/launch.json
+ClockMqtt/.vscode/tasks.json
+DisplayMqtt/.vscode/launch.json
+DisplayMqtt/.vscode/tasks.json
+TimerMqtt/.vscode/launch.json
+TimerMqtt/.vscode/tasks.json

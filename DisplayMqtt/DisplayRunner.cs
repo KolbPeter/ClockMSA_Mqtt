@@ -1,5 +1,5 @@
+using DisplaMqtt.Dtos;
 using DisplayMqtt.DisplayServices;
-using DisplayMqtt.Entities;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MqttComm;
@@ -39,7 +39,7 @@ public class DisplayRunner : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        mqttService.Subscribe(topic: "Clock.DisplayData", onReceive: ReceivedDisplayData);
+        await mqttService.SubscribeAsync(topic: "Clock.DisplayData", onReceive: ReceivedDisplayData);
     }
 
     private void ReceivedDisplayData(string jsonMessage)
@@ -47,7 +47,7 @@ public class DisplayRunner : BackgroundService
         try
         {
             var conversionResult = jsonConverterService
-                .Deserialize<DisplayDataEntities>(message: jsonMessage);
+                .Deserialize<List<DisplayDataEntity>>(message: jsonMessage);
 
             if (conversionResult.IsSuccessful)
             {

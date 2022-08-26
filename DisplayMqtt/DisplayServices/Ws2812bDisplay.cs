@@ -1,5 +1,5 @@
 ﻿using System.Device.Gpio;
-using DisplayMqtt.Entities;
+using DisplaMqtt.Dtos;
 using DisplayMqtt.Extensions;
 using Microsoft.Extensions.Logging;
 
@@ -22,9 +22,9 @@ namespace DisplayMqtt.DisplayServices
         }
 
         /// <inheritdoc/>
-        public void Display(DisplayDataEntities displayData)
+        public void Display(IEnumerable<DisplayDataEntity> displayData)
         {
-            foreach (var ledStrip in displayData.LedStrips)
+            foreach (var ledStrip in displayData)
             {
                 var actions = ledStrip
                     .CreateBitMap()
@@ -39,6 +39,8 @@ namespace DisplayMqtt.DisplayServices
                     {
                         action(controller, ledStrip.DisplayPin);
                     }
+
+                    controller.ClosePin(ledStrip.DisplayPin);
                 }
             }
         }

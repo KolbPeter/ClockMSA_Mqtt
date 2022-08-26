@@ -1,5 +1,5 @@
 using ClockMqtt.BinaryClock;
-using ClockMqtt.Entities;
+using ClockMqtt.Dtos;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MqttComm;
@@ -38,7 +38,7 @@ public class BinaryClockRunner : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        mqttService.Subscribe(topic: "Timer.Tick", onReceive: ReceivedTime);
+        await mqttService.SubscribeAsync(topic: "Timer.Tick", onReceive: ReceivedTime);
     }
 
     private void ReceivedTime(string jsonMessage)
@@ -55,7 +55,7 @@ public class BinaryClockRunner : BackgroundService
 
             if (dataConversion.IsSuccessful)
             {
-                mqttService.Publish(
+                mqttService.PublishAsync(
                     topic: "Clock.DisplayData",
                     message: dataConversion.Data!);
             }
