@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MqttComm;
 using MqttComm.Serializers;
+using System.Diagnostics;
 
 namespace DisplayMqtt;
 

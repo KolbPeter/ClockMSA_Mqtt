@@ -63,12 +63,12 @@ namespace DisplayMqtt.DisplayServices
 
         private void LogHigh()
         {
-            logger.LogDebug($"{DateTime.Now.ToString("hh:mm:ss.FFFFFF")},1");
+            logger.LogDebug($",{DateTime.Now.ToString("hh:mm:ss.FFFFFF")},1");
         }
 
         private void LogLow()
         {
-            logger.LogDebug($"{DateTime.Now.ToString("hh:mm:ss.FFFFFF")},0");
+            logger.LogDebug($",{DateTime.Now.ToString("hh:mm:ss.FFFFFF")},0");
         }
     }
 }

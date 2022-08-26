@@ -40,9 +40,9 @@ namespace DisplayMqtt.Extensions
         public static void Send_0(this GpioController controller, int displayPin)
         {
             controller.Write(displayPin, PinValue.High);
-            Thread.Sleep(TimeSpan.FromTicks(40000));
+            Thread.Sleep(TimeSpan.FromTicks(4));
             controller.Write(displayPin, PinValue.Low);
-            Thread.Sleep(TimeSpan.FromTicks(85000));
+            Thread.Sleep(TimeSpan.FromTicks(8));
             controller.Write(displayPin, PinValue.High);
         }
 
@@ -54,9 +54,9 @@ namespace DisplayMqtt.Extensions
         public static void Send_1(this GpioController controller, int displayPin)
         {
             controller.Write(displayPin, PinValue.High);
-            Thread.Sleep(TimeSpan.FromTicks(80000));
+            Thread.Sleep(TimeSpan.FromTicks(8));
             controller.Write(displayPin, PinValue.Low);
-            Thread.Sleep(TimeSpan.FromTicks(45000));
+            Thread.Sleep(TimeSpan.FromTicks(4));
             controller.Write(displayPin, PinValue.High);
         }
 
