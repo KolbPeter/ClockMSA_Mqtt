@@ -30,16 +30,16 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ClockImage
-        path: clock.tar
+        path: /clock.tar
 
     - name: Upload a Build Artifact, Display
       uses: actions/upload-artifact@v3
       with:
         name: DisplayImage
-        path: display.tar
+        path: ./display.tar
 
     - name: Upload a Build Artifact, Timer
       uses: actions/upload-artifact@v3
       with:
         name: TimerImage
-        path: timer.tar
+        path: /timer.tar
