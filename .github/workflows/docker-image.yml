@@ -14,19 +14,21 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: test_artifact
-        path: /app/*
+        path: /*
         
-  compose:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-
+#  compose:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v3
+#
 #    - name: Compose docker files
 #      run: docker compose build
 
   create_artifacts:
     runs-on: ubuntu-latest
     steps:
+
+    - uses: actions/checkout@v3
     
     - name: Create docker artifact, Clock
       run: docker image build -f ClockMqtt/Dockerfile --output type=tar,dest=clock.tar .
