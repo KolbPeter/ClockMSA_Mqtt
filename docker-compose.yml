@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  clock:
+    build:
+      context: .
+      target: clock
+  display:
+    build:
+      context: .
+      target: display
+  timer:
+    build:
+      context: .
+      target: timer

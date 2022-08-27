@@ -14,11 +14,17 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag binclock:$(date +%s) --output type=local,dest=out 
+#    - name: Build the Docker image
+#      run: docker build . --file Dockerfile --tag binclock:$(date +%s) --output type=local,dest=out 
+
+    - name: Compose docker files
+      run: docker compose up
+
+    - name: Save docker artifacts, Clock
+      run: docker save -o ./out/clock.tar clock
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: DockerImage
-        path: ./out/
+        name: ClockImage
+        path: ./out/clock.tar
