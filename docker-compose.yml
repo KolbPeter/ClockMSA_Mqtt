@@ -1,15 +1,21 @@
 version: '3.4'
 
 services:
+
   clock:
     build:
       context: .
+      dockerfile: /ClockMqtt/Dockerfile
       target: clock
+
   display:
     build:
       context: .
+      dockerfile: /DisplayMqtt/Dockerfile
       target: display
+
   timer:
     build:
       context: .
+      dockerfile: /TimerMqtt/Dockerfile
       target: timer

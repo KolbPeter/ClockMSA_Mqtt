@@ -15,16 +15,16 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Compose docker files
-      run: docker compose up
+      run: docker compose create --build
 
-    - name: Save docker artifact, Clock
-      run: docker save -o clock.tar clockmsa_mqtt_clock
+    - name: Create docker artifact, Clock
+      run: docker image build -f ClockMqtt/Dockerfile --output type=tar,dest=clock.tar .
 
-    - name: Save docker artifact, Display
-      run: docker save -o display.tar clockmsa_mqtt_display
+    - name: Create docker artifact, Display
+      run: docker image build -f DisplayMqtt/Dockerfile --output type=tar,dest=display.tar .
 
-    - name: Save docker artifact, Timer
-      run: docker save -o timer.tar clockmsa_mqtt_timer
+    - name: Create docker artifact, Timer
+      run: docker image build -f TimerMqtt/Dockerfile --output type=tar,dest=timer.tar .
 
     - name: Upload a Build Artifact, Clock
       uses: actions/upload-artifact@v3

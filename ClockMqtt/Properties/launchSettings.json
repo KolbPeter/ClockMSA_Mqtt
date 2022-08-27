@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ClockMqtt": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
