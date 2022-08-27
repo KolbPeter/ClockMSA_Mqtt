@@ -14,17 +14,32 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-#    - name: Build the Docker image
-#      run: docker build . --file Dockerfile --tag binclock:$(date +%s) --output type=local,dest=out 
-
     - name: Compose docker files
       run: docker compose up
 
-    - name: Save docker artifacts, Clock
-      run: docker save -o ./out/clock.tar clock
+    - name: Save docker artifact, Clock
+      run: docker save -o clock.tar clockmsa_mqtt_clock
 
-    - name: Upload a Build Artifact
+    - name: Save docker artifact, Display
+      run: docker save -o display.tar clockmsa_mqtt_display
+
+    - name: Save docker artifact, Timer
+      run: docker save -o timer.tar clockmsa_mqtt_timer
+
+    - name: Upload a Build Artifact, Clock
       uses: actions/upload-artifact@v3
       with:
         name: ClockImage
-        path: ./out/clock.tar
+        path: clock.tar
+
+    - name: Upload a Build Artifact, Display
+      uses: actions/upload-artifact@v3
+      with:
+        name: DisplayImage
+        path: display.tar
+
+    - name: Upload a Build Artifact, Timer
+      uses: actions/upload-artifact@v3
+      with:
+        name: TimerImage
+        path: timer.tar
