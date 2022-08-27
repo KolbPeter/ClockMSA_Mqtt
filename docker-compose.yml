@@ -5,9 +5,6 @@ services:
     build:
       context: .
       target: clock
-      cache_to: 
-       - user/app:cache
-       - type=local,dest=path/to/cache
   display:
     build:
       context: .
