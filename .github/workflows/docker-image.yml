@@ -29,20 +29,21 @@ jobs:
     - name: Create docker artifact, Timer
       run: docker image build -f TimerMqtt/Dockerfile --output type=tar,dest=timer.tar .
 
-  test_upload:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
+#  test_upload:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v3
+ 
     - name: Upload a Build Artifact, Test
       uses: actions/upload-artifact@v3
       with:
         name: test_artifact
         path: /home/runner/work/ClockMSA_Mqtt/*.tar
         
-  upload_artifacts:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
+#  upload_artifacts:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v3
     
     - name: Upload a Build Artifact, Clock
       uses: actions/upload-artifact@v3
