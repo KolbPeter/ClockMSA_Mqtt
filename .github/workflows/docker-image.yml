@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Create docker artifact, Clock
-      run: docker image build -f ClockMqtt/Dockerfile --output type=tar,dest=clock.tar .
+      run: DOCKER_BUILDKIT=1 docker image build -f ClockMqtt/Dockerfile --output type=tar,dest=clock.tar .
 
     - name: Create docker artifact, Display
       run: docker image build -f DisplayMqtt/Dockerfile --output type=tar,dest=display.tar .
