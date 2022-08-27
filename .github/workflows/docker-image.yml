@@ -14,6 +14,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Upload a Build Artifact, Test
+      uses: actions/upload-artifact@v3
+      with:
+        name: test_artifact
+        path: /*.*
+
 #    - name: Compose docker files
 #      run: docker compose build
 
