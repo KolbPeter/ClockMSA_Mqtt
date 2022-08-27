@@ -21,10 +21,10 @@ jobs:
       run: docker compose up
 
     - name: Save docker artifacts, Clock
-      run: docker save -o ./out/clock.tar clock
+      run: docker save -o clock.tar clock
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3
       with:
         name: ClockImage
-        path: ./out/clock.tar
+        path: clock.tar
