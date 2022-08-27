@@ -7,22 +7,27 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build_upload:
-
+  test_upload:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-
     - name: Upload a Build Artifact, Test
       uses: actions/upload-artifact@v3
       with:
         name: test_artifact
-        path: /*.*
+        path: /app/*
+        
+  compose:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
 
 #    - name: Compose docker files
 #      run: docker compose build
 
+  create_artifacts:
+    runs-on: ubuntu-latest
+    steps:
+    
     - name: Create docker artifact, Clock
       run: docker image build -f ClockMqtt/Dockerfile --output type=tar,dest=clock.tar .
 
@@ -32,11 +37,15 @@ jobs:
     - name: Create docker artifact, Timer
       run: docker image build -f TimerMqtt/Dockerfile --output type=tar,dest=timer.tar .
 
+  upload_artifacts:
+    runs-on: ubuntu-latest
+    steps:
+    
     - name: Upload a Build Artifact, Clock
       uses: actions/upload-artifact@v3
       with:
         name: ClockImage
-        path: ../clock.tar
+        path: clock.tar
 
     - name: Upload a Build Artifact, Display
       uses: actions/upload-artifact@v3
@@ -48,4 +57,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: TimerImage
-        path: /timer.tar
+        path: timer.tar
