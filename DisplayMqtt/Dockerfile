@@ -3,7 +3,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS publish
 WORKDIR /src
 COPY . ./
-RUN dotnet publish ./DisplayMqtt/DisplayMqtt.sln -c Release -o /app/Display -r linux-x64 --self-contained
+RUN dotnet publish ./DisplayMqtt/DisplayMqtt.sln -c Release -o /app/Display -r linux-arm64 --self-contained
 
 FROM ubuntu:focal AS display
 WORKDIR /app
