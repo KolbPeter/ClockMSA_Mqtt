@@ -29,10 +29,6 @@ jobs:
     - name: Create docker artifact, Timer
       run: DOCKER_BUILDKIT=1 docker image build -f TimerMqtt/Dockerfile --output type=tar,dest=timer.tar .
 
-  upload_artifacts:
-    needs: create_artifacts
-    runs-on: ubuntu-latest
-    steps:
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v3
       with:
