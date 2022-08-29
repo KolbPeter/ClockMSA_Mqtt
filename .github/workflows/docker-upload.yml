@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+    env:
+      DOCKER_USER: ${{secrets.DOCKERHUB_USER}}
+      DOCKER_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
+      DOCKER_REPO_NAME: "binclock"
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Docker login
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    
+    - name: Build the Docker image
+      run: DOCKER_BUILDKIT=1 docker build . -f ClockMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:clock_$(date +%s)
