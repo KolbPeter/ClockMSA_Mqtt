@@ -13,7 +13,7 @@ jobs:
       DOCKER_USER: ${{secrets.DOCKERHUB_USER}}
       DOCKER_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
       DOCKER_REPO_NAME: "binclock"
-      DOCKER_DATE_TAG: $(date +%s)
+      DOCKER_DATE_TAG: ${{date +%s}}
 
     runs-on: ubuntu-latest
 
