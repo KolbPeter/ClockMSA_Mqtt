@@ -1,0 +1,19 @@
+name: Installer
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Upload Installer Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Installer
+        path: ./Installer
