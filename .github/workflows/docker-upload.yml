@@ -33,4 +33,4 @@ jobs:
       run: DOCKER_BUILDKIT=1 docker build . -f TimerMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:timer_$(date +%s)
       
     - name: Upload images
-      run: docker push -a
+      run: docker push $DOCKER_USER/$DOCKER_REPO_NAME -a
