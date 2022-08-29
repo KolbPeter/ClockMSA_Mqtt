@@ -13,7 +13,6 @@ jobs:
       DOCKER_USER: ${{secrets.DOCKERHUB_USER}}
       DOCKER_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
       DOCKER_REPO_NAME: "binclock"
-      DOCKER_DATE_TAG: ${{date +%s}}
 
     runs-on: ubuntu-latest
 
@@ -25,16 +24,16 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     
     - name: Build the Docker image, clock
-      run: DOCKER_BUILDKIT=1 docker build . -f ClockMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:clock_$DOCKER_DATE_TAG
+      run: DOCKER_BUILDKIT=1 docker build . -f ClockMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:clock_latest
     
     - name: Tag the Docker image, clock
-      run: docker image tag $DOCKER_USER/$DOCKER_REPO_NAME:clock_$DOCKER_DATE_TAG $DOCKER_USER/$DOCKER_REPO_NAME:clock_latest
+      run: docker image tag $DOCKER_USER/$DOCKER_REPO_NAME:clock_latest $DOCKER_USER/$DOCKER_REPO_NAME:clock_$(date +%s)
     
     - name: Build the Docker image, display
-      run: DOCKER_BUILDKIT=1 docker build . -f DisplayMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:display_$DOCKER_DATE_TAG
+      run: DOCKER_BUILDKIT=1 docker build . -f DisplayMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:display_$(date +%s)
     
     - name: Build the Docker image, timer
-      run: DOCKER_BUILDKIT=1 docker build . -f TimerMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:timer_$DOCKER_DATE_TAG
+      run: DOCKER_BUILDKIT=1 docker build . -f TimerMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:timer_$(date +%s)
       
     - name: Upload images
       run: docker push $DOCKER_USER/$DOCKER_REPO_NAME -a
