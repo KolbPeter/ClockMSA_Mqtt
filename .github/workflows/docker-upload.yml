@@ -30,13 +30,13 @@ jobs:
       run: docker image tag $DOCKER_USER/$DOCKER_REPO_NAME:clock_latest $DOCKER_USER/$DOCKER_REPO_NAME:clock_$(date +%s)
     
     - name: Build the Docker image, display
-      run: DOCKER_BUILDKIT=1 docker build . -f DisplayMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:display_$(date +%s)
+      run: DOCKER_BUILDKIT=1 docker build . -f DisplayMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:display_latest
     
     - name: Tag the Docker image, display
       run: docker image tag $DOCKER_USER/$DOCKER_REPO_NAME:display_latest $DOCKER_USER/$DOCKER_REPO_NAME:display_$(date +%s)
     
     - name: Build the Docker image, timer
-      run: DOCKER_BUILDKIT=1 docker build . -f TimerMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:timer_$(date +%s)
+      run: DOCKER_BUILDKIT=1 docker build . -f TimerMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:timer_latest
     
     - name: Tag the Docker image, timer
       run: docker image tag $DOCKER_USER/$DOCKER_REPO_NAME:timer_latest $DOCKER_USER/$DOCKER_REPO_NAME:timer_$(date +%s)
