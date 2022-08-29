@@ -11,9 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+
+    - name: Create artifact folder
+      run: mkdir installer
+        
+    - name: Copy files
+      run: cp ./Installer/* /installer
     
-    - name: Upload Installer Artifacts
-      uses: actions/upload-artifact@v3
-      with:
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with: 
         name: Installer
-        path: ./Installer
+        path: installer
