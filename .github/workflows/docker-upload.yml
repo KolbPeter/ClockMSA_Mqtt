@@ -23,5 +23,14 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     
-    - name: Build the Docker image
+    - name: Build the Docker image, clock
       run: DOCKER_BUILDKIT=1 docker build . -f ClockMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:clock_$(date +%s)
+    
+    - name: Build the Docker image, display
+      run: DOCKER_BUILDKIT=1 docker build . -f DisplayMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:display_$(date +%s)
+    
+    - name: Build the Docker image, timer
+      run: DOCKER_BUILDKIT=1 docker build . -f TimerMqtt/Dockerfile -t $DOCKER_USER/$DOCKER_REPO_NAME:timer_$(date +%s)
+      
+    - name: Upload images
+      run: docker push -a
