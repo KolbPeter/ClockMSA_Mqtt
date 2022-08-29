@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+
+  clock:
+    build:
+      context: .
+      dockerfile: DockerfileClock
+      target: clock
+
+  display:
+    build:
+      context: .
+      dockerfile: DockerfileDisplay
+      target: display
+
+  timer:
+    build:
+      context: .
+      dockerfile: DockerfileTimer
+      target: timer
